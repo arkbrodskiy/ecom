@@ -22,6 +22,7 @@ router.post(
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
+            console.log('Error found in line 23');
             console.log(errors)
             return res.send(signupTemplate({ req, errors }));
         }
@@ -41,7 +42,7 @@ router.get('/signout', (req, res) => {
 });
 
 router.get('/signin', (req, res) => {
-    res.send(signinTemplate());
+    res.send(signinTemplate({}));
 });
 
 router.post(
@@ -51,9 +52,9 @@ router.post(
         requireValidPassword
     ],
      async (req, res) => {
-        const validation = validationResult(req);
-        if (validation.errors.length) {
-            console.log(validation.errors);
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.send(signinTemplate({ errors }));
         }
         const user = await usersRepo.getOneBy({email: req.body.email});
         req.session.userId = user.id;

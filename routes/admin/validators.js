@@ -19,19 +19,16 @@ module.exports = {
         .withMessage('Must be between 4 and 20 characters'),
     requirePasswordConfirmation: check('passwordConfirmation')
         .trim()
-        .custom((passwordConfirmation, { req }) => {
-            console.log("password is: ", req.body.password);
-            console.log("password confirmation is: ", passwordConfirmation);
+        .custom(async (passwordConfirmation, { req }) => {
             if (passwordConfirmation !== req.body.password) {
                 throw new Error('Password and password confirmation must match');
-            } else console.log("Password and password confirmation matched - no errors found");
+            }
         }),
     requireEmailExists: check('email')
         .trim()
         .custom(async (email) => {
             const user = await usersRepo.getOneBy({ email });
             if (!user) {
-                console.log('error in getOneBy() method');
                 throw new Error('No such email found: ' + email);
             }
         }),
