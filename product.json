@@ -1,20 +1,14 @@
 [
   {
-    "title": "Grey Coat Air",
-    "price": 300.22,
-    "image": "",
-    "id": "810c5b49"
-  },
-  {
-    "title": "No Image Shoe",
-    "price": 456.21,
-    "image": "",
-    "id": "f7319ff8"
-  },
-  {
     "title": "Hat for the Rat",
     "price": 858.32,
     "image": "",
     "id": "567c8074"
+  },
+  {
+    "title": "Fig for the Pig",
+    "price": 500.05,
+    "image": "",
+    "id": "c6c8f67d"
   }
 ]
