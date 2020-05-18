@@ -48,12 +48,8 @@ router.get('/cart', async (req, res) => {
 router.post('/cart/products/delete', async (req, res) => {
     const {itemId } = req.body;
     const cart = await cartsRepo.getOne(req.session.cartId);
-    console.log('Cart found: ' + JSON.stringify(cart));
     const itemsToKeep = cart.items.filter(item => item.id !== itemId);
-    console.log('itemstokeep: ' + itemsToKeep);
     await cartsRepo.update(req.session.cartId, { items: itemsToKeep });
-    const updatedCart = await cartsRepo.getOne(req.session.cartId);
-    console.log('Cart updated: ' + JSON.stringify(updatedCart));
     res.redirect('/cart');
 })
 
